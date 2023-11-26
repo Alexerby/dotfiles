@@ -40,6 +40,26 @@ function create_section(level)
 end
 
 
+function underline()
+  if not check_extension() then return end
+
+  local underline_content = "\\underline{}"
+
+  vim.api.nvim_put({ underline_content }, 'l', true, true)
+  vim.fn.feedkeys('kf{a', 'n')
+end
+
+
+function overline()
+  if not check_extension() then return end
+
+  local underline_content = "\\overline{}"
+
+  vim.api.nvim_put({ underline_content }, 'l', true, true)
+  vim.fn.feedkeys('kf{a', 'n')
+end
+
+
 function align_env()
     if not check_extension() then
         return
@@ -68,3 +88,7 @@ vim.api.nvim_set_keymap('n', '<leader>tt', [[:lua create_tex_table()<CR>]], { no
 -- Align env
 vim.api.nvim_set_keymap('n', '<leader>a', [[:lua align_env()<CR>]], { noremap = true, silent = true })
 
+
+-- Math
+vim.api.nvim_set_keymap('n', '<leader>msu', ':lua underline()<CR>', { noremap = true, silent = true }) 	-- underline
+vim.api.nvim_set_keymap('n', '<leader>mso', ':lua overline()<CR>', { noremap = true, silent = true }) 	-- overline
