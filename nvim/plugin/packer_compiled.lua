@@ -125,6 +125,11 @@ _G.packer_plugins = {
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nerdtree",
     url = "https://github.com/preservim/nerdtree"
   },
+  ["nightly.nvim"] = {
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nightly.nvim",
+    url = "https://github.com/Alexis12119/nightly.nvim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nvim-cmp",

@@ -62,6 +62,7 @@ require('packer').startup(function()
 	}
 
 	use 'latex-lsp/texlab'
+	use "Alexis12119/nightly.nvim"
 
 end)
 
