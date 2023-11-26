@@ -1,8 +1,15 @@
-
 -- Set up gruvbox
+function ColorMyPencils(color)
+    color = color or "gruvbox"
+    vim.cmd("colorscheme " .. color)
 
+    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+end
 
-vim.cmd([[colorscheme gruvbox]])
+ColorMyPencils()
+
+-- vim.cmd([[colorscheme gruvbox]])
 
 vim.g.gruvbox_contrast_dark = 'soft'
 vim.g.gruvbox_bold = 1

@@ -1,4 +1,3 @@
--- init.lua
 
 -- Set the working directory to the directory containing init.lua
 local original_cwd = vim.fn.getcwd()
@@ -15,6 +14,7 @@ end
 require('packer').startup(function()
     
     use 'wbthomason/packer.nvim'		-- Packer
+	use 'nvim-lua/plenary.nvim'
     use 'preservim/nerdtree'			-- Nerdtree
     use 'lervag/vimtex'					-- Vimtex
   	use 'morhetz/gruvbox'				-- colorscheme 
@@ -35,8 +35,35 @@ require('packer').startup(function()
 		end
 	}
 
-end)
+	-- Treesitter
+	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 
+	-- lasp-zero
+	use {
+	  'VonHeikemen/lsp-zero.nvim',
+	  branch = 'v3.x',
+	  requires = {
+
+		-- LSP Support
+		{'neovim/nvim-lspconfig'},
+	
+			-- Autocompletion
+		{'hrsh7th/nvim-cmp'},
+		{'hrsh7th/cmp-nvim-lsp'},
+		{'L3MON4D3/LuaSnip'},
+	  }
+	}
+	
+	-- Mason
+	use {
+	    "williamboman/mason.nvim",
+	    "williamboman/mason-lspconfig.nvim",
+	    "neovim/nvim-lspconfig",
+	}
+
+	use 'latex-lsp/texlab'
+
+end)
 
 
 -- Set termguicolors to enable highlight groups
