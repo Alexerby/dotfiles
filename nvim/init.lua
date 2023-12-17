@@ -1,3 +1,4 @@
+local vim = vim or {} -- Avoid undefined global 'vim' error
 
 -- Set the working directory to the directory containing init.lua
 local original_cwd = vim.fn.getcwd()
@@ -11,14 +12,14 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
 end
 
 -- Initialize Packer
-require('packer').startup(function()
+require('packer').startup(function(use)
     
     use 'wbthomason/packer.nvim'		-- Packer
 	use 'nvim-lua/plenary.nvim'
+	use 'nvim-tree/nvim-web-devicons' 	-- DevIcons
     use 'preservim/nerdtree'			-- Nerdtree
     use 'lervag/vimtex'					-- Vimtex
   	use 'morhetz/gruvbox'				-- colorscheme 
-	use 'nvim-tree/nvim-web-devicons' 	-- DevIcons
 	use { "catppuccin/nvim", as = "catppuccin" }
 
 	-- Lualine
@@ -47,7 +48,7 @@ require('packer').startup(function()
 		-- LSP Support
 		{'neovim/nvim-lspconfig'},
 	
-			-- Autocompletion
+		-- Autocompletion
 		{'hrsh7th/nvim-cmp'},
 		{'hrsh7th/cmp-nvim-lsp'},
 		{'L3MON4D3/LuaSnip'},
@@ -64,6 +65,13 @@ require('packer').startup(function()
 	use 'latex-lsp/texlab'
 	use "Alexis12119/nightly.nvim"
 
+	use 'neomake/neomake'
+
+	-- These optional plugins should be loaded directly because of a bug in Packer lazy loading
+	use 'lewis6991/itsigns.nvim' -- OPTIONAL: for git status
+	use 'nvim-tree/nvim-web-devicons' -- OPTIONAL: for file icons
+	use 'romgrk/barbar.nvim'
+
 end)
 
 
@@ -74,7 +82,6 @@ vim.opt.termguicolors = true
 require('plugin_conf.init')
 require('config')
 require('keymaps')
-require("nvim-web-devicons").refresh()
 
 
 vim.cmd('cd ' .. original_cwd)

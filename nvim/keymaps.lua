@@ -12,4 +12,6 @@ vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true })
 require('keymap.tex')
 
 
-
+-- Copy selected text to Windows clipboard
+vim.api.nvim_set_keymap('x', '<C-c>', '"+y', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('x', '<C-x>', '"+d', { noremap = true, silent = true })
