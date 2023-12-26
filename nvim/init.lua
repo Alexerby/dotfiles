@@ -13,75 +13,115 @@ end
 
 -- Initialize Packer
 require('packer').startup(function(use)
-    
-    use 'wbthomason/packer.nvim'		-- Packer
-	use 'nvim-lua/plenary.nvim'
-	use 'nvim-tree/nvim-web-devicons' 	-- DevIcons
-    use 'preservim/nerdtree'			-- Nerdtree
-    use 'lervag/vimtex'					-- Vimtex
-  	use 'morhetz/gruvbox'				-- colorscheme 
-	use { "catppuccin/nvim", as = "catppuccin" }
+    -- Packer and essential plugins
+    use {'wbthomason/packer.nvim', 'nvim-lua/plenary.nvim'}
 
-	-- Lualine
-	use {
-		  'nvim-lualine/lualine.nvim',
-		  requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    -- File explorer and icons
+    use {
+		'nvim-tree/nvim-web-devicons',
+		'preservim/nerdtree'
 	}
 
-	-- Comment
-	use {
-		'numToStr/Comment.nvim',
-		config = function()
-		require('Comment').setup()
-		end
+	require'nvim-tree'.setup {}
+
+    -- LaTeX support
+    use {
+	'lervag/vimtex',
+	'latex-lsp/texlab'
 	}
 
-	-- Treesitter
-	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-
-	-- lasp-zero
 	use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v3.x',
-	  requires = {
-
-		-- LSP Support
-		{'neovim/nvim-lspconfig'},
-	
-		-- Autocompletion
-		{'hrsh7th/nvim-cmp'},
-		{'hrsh7th/cmp-nvim-lsp'},
-		{'L3MON4D3/LuaSnip'},
-	  }
-	}
-	
-	-- Mason
-	use {
-	    "williamboman/mason.nvim",
-	    "williamboman/mason-lspconfig.nvim",
-	    "neovim/nvim-lspconfig",
+	  'nvim-tree/nvim-tree.lua',
 	}
 
-	use 'latex-lsp/texlab'
-	use "Alexis12119/nightly.nvim"
+    -- Colorscheme
+    use 'morhetz/gruvbox'
 
-	use 'neomake/neomake'
+    -- Statusline
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {'nvim-tree/nvim-web-devicons'},
+    }
 
-	-- These optional plugins should be loaded directly because of a bug in Packer lazy loading
-	use 'lewis6991/itsigns.nvim' -- OPTIONAL: for git status
-	use 'nvim-tree/nvim-web-devicons' -- OPTIONAL: for file icons
-	use 'romgrk/barbar.nvim'
+    -- Commenting
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+
+    -- Treesitter
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+
+    -- LSP and completion
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v3.x',
+        requires = {
+            'neovim/nvim-lspconfig',
+            'hrsh7th/nvim-cmp',
+            {'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip'},
+        }
+    }
+
+    -- Mason
+    use {
+		'williamboman/mason.nvim',
+		'williamboman/mason-lspconfig.nvim',
+		'neovim/nvim-lspconfig'
+	}
+
+    -- Miscellaneous plugins
+    use {
+		'neomake/neomake',
+		'Alexis12119/nightly.nvim',
+		'lewis6991/gitsigns.nvim',
+		'romgrk/barbar.nvim'
+	}
+
+    -- Autopairs
+    use {
+        'windwp/nvim-autopairs',
+        config = function()
+            require('nvim-autopairs').setup {}
+        end
+    }
+
+    -- Syntax highlighting
+    use 'numirias/semshi'
+
+    -- Telescope
+    use {
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.5',
+        requires = {'nvim-lua/plenary.nvim'}
+    }
+
+    -- Terminal
+    use {
+        'akinsho/toggleterm.nvim',
+        tag = '*',
+        config = function()
+            require('toggleterm').setup()
+        end
+    }
+
+	use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+	use 'hrsh7th/nvim-cmp'
+	use 'hrsh7th/cmp-nvim-lsp'
+	use 'saadparwaiz1/cmp_luasnip'
+	use 'rafamadriz/friendly-snippets'
 
 end)
-
 
 -- Set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
 -- Other configurations
-require('plugin_conf.init')
 require('config')
-require('keymaps')
-
+require('plugin_conf.init')
+require('other.init')
 
 vim.cmd('cd ' .. original_cwd)
+

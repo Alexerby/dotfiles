@@ -1,3 +1,4 @@
+vim = vim or {}
 
 -- Show line numbers
 vim.wo.number = true
@@ -13,4 +14,7 @@ vim.cmd('highlight CursorLineNr ctermbg=NONE guibg=NONE')
 
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
+
+require('keymaps')
+
 

@@ -76,18 +76,13 @@ function align_env()
     vim.fn.feedkeys('\t', 'n')
 end
 
-
-
 -- Create \section{}, \subsection{} and \subsubsection{}
 vim.api.nvim_set_keymap('n', '<leader>q', [[:lua create_section(1)<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>qq', [[:lua create_section(2)<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>qqq', [[:lua create_section(3)<CR>]], { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>tt', [[:lua create_tex_table()<CR>]], { noremap = true, silent = true })
-
 -- Align env
 vim.api.nvim_set_keymap('n', '<leader>a', [[:lua align_env()<CR>]], { noremap = true, silent = true })
-
 
 -- Math
 vim.api.nvim_set_keymap('n', '<leader>msu', ':lua underline()<CR>', { noremap = true, silent = true }) 	-- underline

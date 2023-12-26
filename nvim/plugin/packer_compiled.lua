@@ -90,15 +90,25 @@ _G.packer_plugins = {
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/barbar.nvim",
     url = "https://github.com/romgrk/barbar.nvim"
   },
-  catppuccin = {
-    loaded = true,
-    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/catppuccin",
-    url = "https://github.com/catppuccin/nvim"
-  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+  },
+  cmp_luasnip = {
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
+  dotnvim = {
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/dotnvim",
+    url = "https://github.com/dontpanic92/dotnvim"
+  },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -145,6 +155,12 @@ _G.packer_plugins = {
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nightly.nvim",
     url = "https://github.com/Alexis12119/nightly.nvim"
   },
+  ["nvim-autopairs"] = {
+    config = { "\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -155,10 +171,20 @@ _G.packer_plugins = {
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-ufo"] = {
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nvim-ufo",
+    url = "https://github.com/kevinhwang91/nvim-ufo"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -175,10 +201,31 @@ _G.packer_plugins = {
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["promise-async"] = {
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/promise-async",
+    url = "https://github.com/kevinhwang91/promise-async"
+  },
+  semshi = {
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/semshi",
+    url = "https://github.com/numirias/semshi"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
   texlab = {
     loaded = true,
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/texlab",
     url = "https://github.com/latex-lsp/texlab"
+  },
+  ["toggleterm.nvim"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0" },
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
   },
   vimtex = {
     loaded = true,
@@ -192,6 +239,14 @@ time([[Defining packer_plugins]], false)
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
 time([[Config for Comment.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
