@@ -18,3 +18,5 @@ vim.o.shiftwidth = 4
 require('keymaps')
 
 
+vim.api.nvim_set_var('mapleader', ',')
+vim.g.maplocalleader = ','

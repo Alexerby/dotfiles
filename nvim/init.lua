@@ -5,7 +5,7 @@ local original_cwd = vim.fn.getcwd()
 vim.cmd('cd ' .. vim.fn.expand('~/.config/nvim'))
 
 -- Clone Packer if not installed yet
-local packer_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local packer_path = vim.fn.stdpath('config')..'/pack/packer/start/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
     vim.cmd('!git clone --depth 1 https://github.com/wbthomason/packer.nvim ' .. packer_path)
@@ -27,8 +27,9 @@ require('packer').startup(function(use)
     -- LaTeX support
     use {
 	'lervag/vimtex',
-	'latex-lsp/texlab'
 	}
+
+	use 'brennier/quicktex'
 
 	use {
 	  'nvim-tree/nvim-tree.lua',
@@ -112,8 +113,9 @@ require('packer').startup(function(use)
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'saadparwaiz1/cmp_luasnip'
 	use 'rafamadriz/friendly-snippets'
-
+	
 end)
+
 
 -- Set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
@@ -121,7 +123,12 @@ vim.opt.termguicolors = true
 -- Other configurations
 require('config')
 require('plugin_conf.init')
+
+-- Your key mappings
+vim.api.nvim_set_keymap('n', '<leader>t', ':ToggleTerm<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<leader>t', '<C-\\><C-n><cmd>ToggleTerm<CR>', { noremap = true, silent = true })
 require('other.init')
+
 
 vim.cmd('cd ' .. original_cwd)
 

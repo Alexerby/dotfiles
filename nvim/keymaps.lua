@@ -14,6 +14,6 @@ vim.api.nvim_set_keymap('t', '<C-w>', '<C-\\><C-n>:CFloatTerm<CR>', {noremap = t
 -- Run Python for current file (if cwd set to current dir)
 vim.api.nvim_set_keymap('n', '<leader>r', [[:!python3 %<CR>]], { noremap = true, silent = true })
 
--- ToggleTerminal
-vim.api.nvim_set_keymap('n', '<leader>t', ':ToggleTerm<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('t', '<leader>t', '<C-\\><C-n><cmd>ToggleTerm<CR>', { noremap = true, silent = true })
+-- -- ToggleTerminal
+-- vim.api.nvim_set_keymap('n', '<leader>t', ':ToggleTerm<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('t', '<leader>t', '<C-\\><C-n><cmd>ToggleTerm<CR>', { noremap = true, silent = true })
