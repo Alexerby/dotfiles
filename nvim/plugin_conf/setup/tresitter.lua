@@ -9,7 +9,7 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
+    disable = {"latex"}
   },
 }
 
-vim.g.python3_host_prog = '/usr/bin/python3'

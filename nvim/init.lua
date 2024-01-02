@@ -76,9 +76,15 @@ require('packer').startup(function(use)
     -- Miscellaneous plugins
     use {
 		'neomake/neomake',
-		'Alexis12119/nightly.nvim',
 		'lewis6991/gitsigns.nvim',
 		'romgrk/barbar.nvim'
+	}
+
+	-- Colorschemes
+	use {
+		'Alexis12119/nightly.nvim',
+		'catppuccin/nvim',
+		'folke/tokyonight.nvim',
 	}
 
     -- Autopairs

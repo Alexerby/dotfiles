@@ -150,6 +150,11 @@ _G.packer_plugins = {
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nightly.nvim",
     url = "https://github.com/Alexis12119/nightly.nvim"
   },
+  nvim = {
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/nvim",
+    url = "https://github.com/catppuccin/nvim"
+  },
   ["nvim-autopairs"] = {
     config = { "\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
     loaded = true,
@@ -221,6 +226,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleri/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
+  },
+  ["tokyonight.nvim"] = {
+    loaded = true,
+    path = "/home/aleri/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
+    url = "https://github.com/folke/tokyonight.nvim"
   },
   vimtex = {
     loaded = true,
