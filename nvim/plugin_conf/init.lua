@@ -15,5 +15,7 @@ require('plugin_conf.setup.nvim-ufo')
 require('plugin_conf.setup.completions')
 require('plugin_conf.setup.nvim-tree')
 require('plugin_conf.setup.luasnip')
+require('plugin_conf.setup.treesitter')
+
 
 

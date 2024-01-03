@@ -114,7 +114,7 @@ require('packer').startup(function(use)
         end
     }
 
-	use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+	-- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'saadparwaiz1/cmp_luasnip'

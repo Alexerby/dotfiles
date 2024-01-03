@@ -9,8 +9,9 @@ require('telescope').setup{
     file_ignore_patterns = {
       "node_modules/",
       "build/",
-	  "__pycache__/",
-      "virtualenv/",
+	  "__pycache__",
+      "virtualenv",
+	  "venv",
       ".*language%-servers/.*",
       -- LaTeX
       "%.aux$",
