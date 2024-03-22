@@ -1,0 +1,79 @@
+configuration {
+    display-drun: "Application: ";
+    display-run: "Run: ";
+    display-window: "Windows";
+    drun-display-fomrat: "{icon} {name}";
+    font: "JetBrainsMono Nerd Font Medium 10";
+    show-icons: true;
+    icon-theme: "Papirus";
+}
+
+@theme "/dev/null"
+
+* {
+
+    background:         rgba( 33, 34, 34, 0.2 );
+    background-alt:     rgba( 240, 113, 26, 0.2 ); 
+    background-title:     rgba( 240, 113, 26, 0.5 ); 
+
+    foreground:         rgba( 223, 223, 223, 0.2 );
+
+    primary:            rgba( 223, 223, 223, 1 );
+    secondary:          rgba( 240, 113, 26, 1 );
+
+    border:             0;
+    margin:             0;
+    padding:            0;
+    spacing:            0;
+
+    text-color:         @primary;
+
+    font: "Awasome 10";
+    background-color:   @background;
+}
+
+
+window {
+    width: 30%;
+    format: horizontal;
+}
+
+
+inputbar {
+    background-color: @background-title;
+}
+
+prompt {
+    padding: 20;
+    font: "Awasome 12";
+}
+
+entry {
+    padding: 20;
+}
+
+listview {
+}
+
+element {
+    height: 50;
+}
+
+element selected {
+    background-color: @background-alt;
+    text-color: @background-alt;
+}
+
+
+
+element-text {
+    padding: 10;
+}
+
+element-text selected {
+}
+
+element-icon {
+    padding: 10;
+}
+

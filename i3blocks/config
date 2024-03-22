@@ -1,0 +1,142 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+command=$SCRIPT_DIR/$BLOCK_NAME
+separator_block_width=10
+markup=pango
+
+# [i3volume]
+# label=🔊 
+# command=$SCRIPT_DIR/i3-volume/volume output i3blocks
+# interval=once
+# signal=10
+# color=#b8bb26
+# separator=false
+# separator_block_width=10
+# markup=pango
+
+[weather]
+command=$SCRIPT_DIR/i3blocks-contrib/weather/weather
+separator=false
+interval=300
+separator_block_width=30
+
+[temperature]
+label=CPU  󰏈  
+command=$SCRIPT_DIR/temperature/temperature
+separator=false
+interval=10
+# background=#007EE5
+
+[cpu_usage]
+label=󰻠 
+# min_width=CPU 100.00%
+command=$SCRIPT_DIR/cpu_usage/cpu_usage
+separator=false
+interval=1
+separator_block_width=30
+
+[disk]
+label=🖴 
+command=$SCRIPT_DIR/i3blocks-contrib/disksize/disksize /
+interval=100
+separator=false
+
+[Onedrive]
+label=󰅟 
+command=$SCRIPT_DIR/i3blocks-contrib/disksize/disksize ~/OneDrive
+interval=100
+separator=false
+
+[Dropbox]
+label=󰇣 
+command=$SCRIPT_DIR/i3blocks-contrib/disksize/disksize ~/Dropbox
+interval=100
+separator_block_width=30
+separator=false
+
+[wifi]
+# INTERFACE=wlp3s0
+label=wifi:
+interval=10
+separator=false
+
+[bandwidth]
+# INTERFACE=eth0
+# interval=5
+# command=$SCRIPT_DIR/bandwidth2/bandwidth2
+
+[load_average]
+label=LOAD
+interval=10
+
+[battery]
+label=BAT
+#label=⚡
+interval=30
+
+[crypto]
+label=󰠓 
+color=#f7931a
+separator=false
+instance=bitcoin
+interval=60
+command=$SCRIPT_DIR/i3blocks-crypto/crypto
+command=$SCRIPT_DIR/i3blocks-contrib/yfinance/latest BTC-USD
+
+[crypto]
+label=󰡪
+color=#5F7AE3
+separator=false
+instance=ethereum
+interval=60
+command=$SCRIPT_DIR/i3blocks-contrib/yfinance/latest ETH-USD
+separator_block_width=30
+
+[indice]
+label=OMXS30
+instance=OMXS30
+interval=60
+command=$SCRIPT_DIR/i3blocks-contrib/yfinance/latest ^OMX
+separator=false
+
+[indice]
+label=SP300
+instance=SP300
+interval=60
+command=$SCRIPT_DIR/i3blocks-contrib/yfinance/latest ^GSPC
+separator=false
+
+[indice]
+label=NDX100
+instance=NDX
+interval=60
+command=$SCRIPT_DIR/i3blocks-contrib/yfinance/latest ^NDX
+separator_block_width=30
+
+[time]
+label=📅
+command=date '+%Y-%m-%d  🕖 %H:%M     '
+interval=30
+
+
