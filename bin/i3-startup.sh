@@ -13,7 +13,7 @@ i3-msg 'workspace 2; move workspace to output DP-2'
 # random_image=$(find "$HOME/Pictures/Background Images" -type f | shuf -n 1)
 # feh --no-fehbg --bg-scale "$random_image"
 
-feh --bg-scale "$HOME/Pictures/Background Images/Shanghai.jpg"
+feh --bg-scale "$HOME/Pictures/Background Images/Shanghai.png"
 
 # Change keyboard layout to Swedish
 setxkbmap se
