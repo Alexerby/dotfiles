@@ -90,9 +90,10 @@ bindsym $mod+Return exec $wm_setting_app_terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# dmenu
-bindsym $mod+a exec --no-startup-id $wm_setting_app_launcher
-bindsym $mod+d exec --no-startup-id $wm_setting_launcher
+# Bindings
+bindsym $mod+a          exec --no-startup-id $wm_setting_app_launcher
+bindsym $mod+d          exec --no-startup-id $wm_setting_launcher
+bindsym $mod+ctrl+l     exec --no-startup-id i3lock-fancy-dualmonitor
 
 # change focus
 bindsym $mod+h focus left

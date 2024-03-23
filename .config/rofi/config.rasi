@@ -12,11 +12,11 @@ configuration {
 
 * {
 
-    background:         rgba( 33, 34, 34, 0.2 );
-    background-alt:     rgba( 240, 113, 26, 0.2 ); 
-    background-title:     rgba( 240, 113, 26, 0.5 ); 
+    background:         rgba( 33, 34, 34, 0.4 );
+    background-alt:     rgba( 240, 113, 26, 0.4 ); 
+    background-title:     rgba( 240, 113, 26, 0.6 ); 
 
-    foreground:         rgba( 223, 223, 223, 0.2 );
+    foreground:         rgba( 223, 223, 223, 0.4 );
 
     primary:            rgba( 223, 223, 223, 1 );
     secondary:          rgba( 240, 113, 26, 1 );
