@@ -1,2 +1,3 @@
+
 rclone mount --vfs-cache-mode full Dropbox: ~/Dropbox --daemon &&
 notify-send "Dropbox connected"

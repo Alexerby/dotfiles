@@ -1,0 +1,2 @@
+rclone mount Googledrive ~/GoogleDrive --daemon &&
+notify-send "Google Drive connected"

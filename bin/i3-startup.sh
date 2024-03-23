@@ -21,11 +21,11 @@ setxkbmap se
 # Set CAPS equivalent to CTRL
 setxkbmap -option "caps:ctrl_modifier"
 pkill picom
-picom -b 
+picom --config ~/.config/picom/picom.conf 
 
 
 pkill polybar
 polybar hidden 
 polybar main 
 
-~/bin/xborder --config ~/.config/xborder.conf
+~/bin/xborder --config ~/.config/xborder/xborder.conf

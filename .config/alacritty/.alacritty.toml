@@ -1,0 +1,29 @@
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.primary]
+background = "0x212224"
+
+[font.bold]
+family = "JetBrains Mono Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "JetBrains Mono Nerd Font"
+style = "BoldItalic"
+
+[font.italic]
+family = "JetBrains Mono Nerd Font"
+style = "MediumItalic"
+
+[font.normal]
+family = "JetBrains Mono Nerd Font"
+style = "Medium"
+
+[window]
+# opacity = 0.8
+
+[window.padding]
+x = 5
+y = 5
+
