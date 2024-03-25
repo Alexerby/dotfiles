@@ -58,7 +58,7 @@ set $gaps_inner                         10
 set $gaps_outer                         10
 
 ### Borders ###
-# default_border pixel                    $wm_setting_border_size
+default_border pixel                    $wm_setting_border_size
 # default_floating_border pixel           $wm_setting_border_size
 default_border pixel                    0
 default_floating_border pixel           0 
