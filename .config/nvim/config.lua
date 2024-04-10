@@ -22,8 +22,6 @@ vim.g.maplocalleader = ','
 vim.cmd('set clipboard=unnamedplus')
 
 
-
-
 vim.cmd([[
 function! PythonAutocmds()
   augroup PythonAutocmds

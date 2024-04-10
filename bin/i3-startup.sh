@@ -24,7 +24,7 @@ pkill picom
 picom --config ~/.config/picom/picom.conf 
 
 
-pkill polybar
+pkill polybar -f
 polybar hidden 
 polybar main 
 

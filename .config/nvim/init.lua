@@ -19,10 +19,7 @@ require('packer').startup(function(use)
     use {'wbthomason/packer.nvim', 'nvim-lua/plenary.nvim'}
 
     -- File explorer and icons
-    use {
-		'nvim-tree/nvim-web-devicons',
-		'preservim/nerdtree'
-	}
+    use 'nvim-tree/nvim-web-devicons'
 
     -- LaTeX support
     use 'lervag/vimtex'
@@ -109,43 +106,6 @@ require('packer').startup(function(use)
 
 	use {"tpope/vim-fugitive"}
 
-	use({
-	  "epwalsh/obsidian.nvim",
-	  tag = "*",
-	  requires = {
-		"nvim-lua/plenary.nvim",
-	  },
-	  config = function()
-		require("obsidian").setup({
-		  workspaces = {
-			{
-			  name = "personal",
-			  path = "~/Obsidian/Personal Vault",
-			},
-		  },
-		  completion = {
-			nvim_cmp = true,
-			min_chars = 2,
-		  },
-
-		  mappings = {
-			["gf"] = {
-			  action = function()
-				return require("obsidian").util.gf_passthrough()
-			  end,
-			  opts = { noremap = false, expr = true, buffer = true },
-			},
-			["<leader>ch"] = {
-			  action = function()
-				return require("obsidian").util.toggle_checkbox()
-			  end,
-			  opts = { buffer = true },
-			},
-		  },
-			})
-		  end,
-		})
-
     use {
       'abecodes/tabout.nvim',
       config = function()
@@ -173,6 +133,10 @@ require('packer').startup(function(use)
         wants = {'nvim-treesitter'}, -- or require if not used so far
         after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
     }
+
+    use 'iamcco/markdown-preview.nvim'
+    use 'folke/todo-comments.nvim'
+    use 'ThePrimeagen/Harpoon'
 
 end)
 

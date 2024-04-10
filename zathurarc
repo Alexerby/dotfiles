@@ -16,7 +16,7 @@
 # S_green   #859900
 
 set font "Terminus Bold 10"
-set recolor true
+set recolor false
 set render-loading false
 set zoom-step 50
 
