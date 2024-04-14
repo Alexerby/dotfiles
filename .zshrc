@@ -28,6 +28,7 @@ alias tre="exa --tree --icons"
 alias python="python3"
 alias vim="nvim"
 alias cat="batcat"
+alias rm="$HOME/bin/rm_tmp"
 
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
