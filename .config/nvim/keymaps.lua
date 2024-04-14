@@ -31,18 +31,11 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
-
 -- :so alias for :source
 vim.cmd[[command! -nargs=* So source <args>]]
 
-
 -- Escape insert mode using j
 keymap('i', 'jj', '<Esc>', { noremap = true })
-
-
--- Map the key combination to the defined function
-keymap('n', '<S-q>', '<Esc>[s1z=A', opts)
-keymap('i', '<S-q>', '<Esc>[s1z=A', opts)
 
 -- ToggleTerminal
 keymap('n', '<leader>t', ':ToggleTerm<CR>', opts)
@@ -61,5 +54,33 @@ vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
 vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
 vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
 
-
+-- Stop marking hlsearch word
 vim.api.nvim_set_keymap('n', 'dg', ':nohlsearch<CR>', { noremap = true, silent = true })
+
+-- Quickfix for TODO
+vim.api.nvim_set_keymap('n', '<leader>qf', ':TodoQuickFix<CR>', {noremap = true, silent = true})
+
+-----------------------------------------
+-- # - Telescope
+-----------------------------------------
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fs', builtin.grep_string, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.api.nvim_set_keymap('n', '<leader>ft', ':TodoTelescope<CR>', {noremap = true, silent = true})
+
+-- Telescope fuzzy finder without hidden files
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+
+-- Telescope fuzzy finder with hidden files
+vim.api.nvim_set_keymap('n', '<leader>ffh', '<cmd>lua require("telescope.builtin").find_files({hidden = true})<cr>', {noremap = true, silent = true})
+
+-- Create a command that calls the function
+vim.api.nvim_set_keymap('n', '<leader>mm', [[:lua GENERATE_MERMAID_DIAGRAM()<CR>]], { noremap = true, silent = true })
+
+-- Bind the notetaker function to a key (e.g., <leader>n)
+vim.api.nvim_set_keymap('n', '<leader>n', ':lua notetaker()<CR>', { noremap = true, silent = true })
+
+-- NvimTreeToggle
+vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })

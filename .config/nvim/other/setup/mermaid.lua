@@ -6,6 +6,3 @@ function GENERATE_MERMAID_DIAGRAM()
     vim.fn.system(command)
 end
 
--- Create a command that calls the function
-vim.api.nvim_set_keymap('n', '<Leader>mm', [[:lua GENERATE_MERMAID_DIAGRAM()<CR>]], { noremap = true, silent = true })
-
