@@ -1,21 +1,13 @@
-vim.g.vimtex_compiler_latexmk = {
-    aux_dir = './misc',
-}
+-- vim.g.vimtex_compiler_latexmk = {
+--     aux_dir = './misc',
+-- }
 
 
-vim.g.vimtex_compiler_method = 'latexmk'
 vim.g.tex_flavor = 'latex'
-
+vim.g.vimtex_compiler_method = "arara"
 vim.g.vimtex_view_method = 'zathura'
 
-
-vim.g.vimtex_compiler_latexmk_engines = {
-    pdflatex = '-pdflatex=pdflatex',
-}
-
 vim.api.nvim_command('set conceallevel=1')
-vim.g.tex_conceal = 'abdmg'
-
 vim.api.nvim_exec([[
   let g:vimtex_auto_write = 0
 ]], false)
@@ -28,3 +20,9 @@ vim.api.nvim_exec([[
     augroup END
 ]], false)
 
+vim.cmd([[
+  augroup TexAutoCompile
+    autocmd!
+    autocmd BufWritePost *.tex normal ,ll
+  augroup END
+]])
