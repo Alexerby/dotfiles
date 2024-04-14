@@ -11,4 +11,5 @@ require('config.setup.completions')
 require('config.setup.nvim-tree')
 require('config.setup.treesitter')
 require('config.setup.luasnip')
+require('config.setup.todo')
 
