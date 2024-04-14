@@ -14,7 +14,7 @@ export PATH="$HOME/bin:$PATH"
 
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
