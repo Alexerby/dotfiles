@@ -33,3 +33,4 @@ endfunction
 call PythonAutocmds()
 ]])
 
+vim.opt.ignorecase = true

@@ -10,7 +10,6 @@ if not luasnip_status then
 end
 
 
-require("luasnip/loaders/from_vscode").lazy_load()
 
 vim.opt.completeopt = "menu,menuone,noselect"
 
@@ -50,7 +49,7 @@ lspconfig.emmet_ls.setup{filetypes = {"html", "htmldjango"}}
 lspconfig.clangd.setup{filetypes = {"c", "cpp"}}
 
 lspconfig.cssls.setup {
-    filetypes = {"css", "scss", "less"}
+    filetypes = {"css", "less"}
 }
 
 lspconfig.tsserver.setup {

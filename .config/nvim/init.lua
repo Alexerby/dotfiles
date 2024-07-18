@@ -138,6 +138,7 @@ require('packer').startup(function(use)
     use 'folke/todo-comments.nvim'
     use 'ThePrimeagen/Harpoon'
 
+
 end)
 
 -- Set termguicolors to enable highlight groups
