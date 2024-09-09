@@ -30,26 +30,38 @@ white   = "#f5e0dc"  # rosewater
 text = "#1e1e2e"    # base
 cursor = "#cdd6f4"  # text
 
+[font]
+size = 16
+
 [font.bold]
-family = "JetBrains Mono Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrains Mono Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "BoldItalic"
 
 [font.italic]
-family = "JetBrains Mono Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "MediumItalic"
 
 [font.normal]
-family = "JetBrains Mono Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Medium"
 
 [window]
-# opacity = 0.8
+opacity = 0.8
 
 [window.padding]
 x = 5
 y = 5
 
+[[keyboard.bindings]]
+key = "J"
+mods = "Super"
+chars = "\u000a"
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Super"
+chars = "\u000b"
