@@ -31,7 +31,7 @@ text = "#1e1e2e"    # base
 cursor = "#cdd6f4"  # text
 
 [font]
-size = 16
+size = 12
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
@@ -50,7 +50,7 @@ family = "JetBrainsMono Nerd Font"
 style = "Medium"
 
 [window]
-opacity = 0.8
+opacity = 0.85
 
 [window.padding]
 x = 5
