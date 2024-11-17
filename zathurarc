@@ -21,9 +21,9 @@ set render-loading false
 set zoom-step 50
 
 map t scroll half-down
-map n scroll half-up
+# map n scroll half-up
 map T scroll down
-map N scroll up
+# map N scroll up
 map h search forward # not currently documented (as of 0.2.7), read the source!
 map H search backward # not currently documented (as of 0.2.7), read the source!
 map A zoom out
