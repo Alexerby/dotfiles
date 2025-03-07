@@ -1,0 +1,1 @@
+/Users/alexer/dotfiles/.config/i3
