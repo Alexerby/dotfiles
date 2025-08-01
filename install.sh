@@ -3,7 +3,7 @@
 DOTFILES="$HOME/.dotfiles"
 
 # Comma separated list of stow folders
-STOW_FOLDERS="nvim,tmux,zsh,zathura"
+STOW_FOLDERS="nvim,tmux,zsh,zathura,alacritty"
 
 # cd to dotfiles directory
 cd "$DOTFILES" || {
