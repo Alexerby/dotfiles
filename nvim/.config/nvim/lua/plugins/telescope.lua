@@ -62,7 +62,9 @@ return {
     keymap('n', '<leader>fr', builtin.lsp_references, opts) -- Find LSP references for the word under cursor
 
     -- File search (non-filtered) - This will still use global ignore patterns unless explicitly overridden
-    keymap('n', '<leader>ffh', builtin.find_files, opts)
+    keymap('n', '<leader>ffh', function()
+      require('telescope.builtin').find_files({ hidden = true })
+    end, opts)
 
     -- File search (using global ignore patterns)
     -- Since 'file_ignore_patterns' is set in telescope.setup.defaults,
