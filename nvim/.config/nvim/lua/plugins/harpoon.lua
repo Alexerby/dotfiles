@@ -10,9 +10,9 @@ return {
     -- Toggle menu
     { "<leader>hu", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Harpoon Quick Menu" },
     -- Navigate to file 1-4
-    { "<leader>h1", function() require("harpoon.ui").nav_file(1) end, desc = "Harpoon File 1" },
-    { "<leader>h2", function() require("harpoon.ui").nav_file(2) end, desc = "Harpoon File 2" },
-    { "<leader>h3", function() require("harpoon.ui").nav_file(3) end, desc = "Harpoon File 3" },
-    { "<leader>h4", function() require("harpoon.ui").nav_file(4) end, desc = "Harpoon File 4" },
+    { "<leader>1", function() require("harpoon.ui").nav_file(1) end, desc = "Harpoon File 1" },
+    { "<leader>2", function() require("harpoon.ui").nav_file(2) end, desc = "Harpoon File 2" },
+    { "<leader>3", function() require("harpoon.ui").nav_file(3) end, desc = "Harpoon File 3" },
+    { "<leader>4", function() require("harpoon.ui").nav_file(4) end, desc = "Harpoon File 4" },
   },
 }
