@@ -11,4 +11,5 @@ vim.g.maplocalleader = " "
 map('i', 'jj', '<ESC>', opts)
 map('n', '<leader>d', '<Cmd>nohlsearch<CR>', opts)
 map('n', '<F4>', ':w<CR>:!python3 %<CR>', opts)
+map('n', '<leader>w', '<C-w>', opts)
 
