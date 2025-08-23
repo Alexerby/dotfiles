@@ -183,4 +183,21 @@ ${1}($2){
 	${0}
 }
 endsnippet
-# vim:ft=snippets:
+# vim:ft=snippets
+
+
+
+snippet doc "C function docstring (Doxygen-style)" b
+/**
+ * @brief ${1:Brief description}
+ *
+ * @param ${2:param} ${3:Description of parameter}
+ * @return ${4:Description of return value}
+ */
+$0
+endsnippet
+
+snippet idoc "C function docstring inline" b 
+/* ${1:Description} */
+$0
+endsnippet
