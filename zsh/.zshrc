@@ -121,4 +121,5 @@ export NVM_DIR="$HOME/.nvm"
 # Aliases 
 alias vim="nvim"
 alias ls="eza --icons"
+alias tree="eza -T --icons"
 export PATH="$HOME/.local/bin:$PATH"
