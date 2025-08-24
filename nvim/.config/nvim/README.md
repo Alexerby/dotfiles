@@ -14,7 +14,7 @@ Personal reminders for configuring and troubleshooting this Neovim setup.
    ```
 2. Install the missing `tslib` dependency:
    ```bash
-   npm install tslib
+   npm install
    ```
 
 **Check**:
