@@ -28,7 +28,7 @@ return {
     return {
       indent = {
         highlight = highlight,
-        char = "▏",  -- ← use thin Unicode vertical bar
+        char = "▏",  -- use thin Unicode vertical bar
       }
     }
   end,
