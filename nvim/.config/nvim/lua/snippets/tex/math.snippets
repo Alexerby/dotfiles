@@ -44,7 +44,7 @@ endsnippet
 
 context "math()"
 snippet compl "complement" iA
-^{c}
+^{\complement}
 endsnippet
 
 context "math()"
@@ -191,6 +191,16 @@ snippet dsum "Definite Sum" iA
 endsnippet
 
 context "math()"
+snippet iprod "Indefinite Prod" iA
+\prod 
+endsnippet
+
+context "math()"
+snippet dprod "Definite Prod" iA
+\prod_{${1:n=0}}^{${2:\infty}}
+endsnippet
+
+context "math()"
 snippet cap  "cap" iA
 \cap 
 endsnippet
@@ -313,7 +323,7 @@ endsnippet
 
 context "math()"
 snippet nabla "gradient" iA
-\nabla 
+\nabla
 endsnippet
 
 context "math()"
@@ -368,18 +378,22 @@ endsnippet
 
 context "math()"
 snippet ln "ln" iA
-\ln{($1)} 
+\ln $1 
 endsnippet
 
 context "math()"
 snippet txt "text" iA
-\text{$1} 
+\text{$1}
 endsnippet
-
 
 context "math()"
 snippet max "max" iA
-\max 
+\max
+endsnippet
+
+context "math()"
+snippet arg "arg" iA
+\arg
 endsnippet
 
 context "math()"
@@ -480,10 +494,10 @@ snippet above "Stack above" iA
 \stackrel{$1}{$2} 
 endsnippet
 
-context "math()"
-snippet under "Text under" iA
-\underset{$1}{$2} 
-endsnippet
+# context "math()"
+# snippet under "Text under" iA
+# \underset{$1}{$2} 
+# endsnippet
 
 context "math()"
 snippet '([A-Za-z])(\d)' "auto subscript" wrA
@@ -515,7 +529,7 @@ endsnippet
 
 context "math()"
 snippet perp "perp" iA
-^\perp
+\perp
 endsnippet
 
 
@@ -549,7 +563,7 @@ snippet lr< "leftangle rightangle" iA
 endsnippet
 
 context "math()"
-snippet vlen "vlen" iA
+snippet magn "magnitude / norm" iA
 \| $1 \| 
 endsnippet
 
@@ -569,6 +583,21 @@ snippet aprx "approximate" iA
 endsnippet
 
 context "math()"
-snippet bsymb "bold symbol" iA
+snippet bsy "bold symbol" iA
 \boldsymbol{$1}
+endsnippet
+
+context "math()"
+snippet star "star" iA
+\star
+endsnippet
+
+context "math()"
+snippet log "log" iA
+\log
+endsnippet
+
+context "math()"
+snippet sign "sign function" iA
+\sign($1)$0
 endsnippet

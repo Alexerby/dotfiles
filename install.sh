@@ -3,7 +3,7 @@
 DOTFILES="$HOME/.dotfiles"
 
 # Comma separated list of stow folders
-STOW_FOLDERS="nvim,tmux,zsh,zathura,alacritty"
+STOW_FOLDERS="nvim,tmux,zsh,zathura,alacritty,lazygit"
 
 # cd to dotfiles directory
 cd "$DOTFILES" || {
@@ -11,8 +11,8 @@ cd "$DOTFILES" || {
   exit 1
 }
 
-# Convert comma-separated string to array
-IFS=',' read -ra folders <<< "$STOW_FOLDERS"
+IFS=',' # Convert comma-separated string to array
+read -ra folders <<< "$STOW_FOLDERS"
 
 # Loop through and stow each
 for folder in "${folders[@]}"; do

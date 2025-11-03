@@ -5,9 +5,7 @@ return {
         vim.g.UltiSnipsSnippetDirectories = {'~/.config/nvim/lua/snippets'}
 
         vim.g.UltiSnipsExpandTrigger="<tab>"
-        vim.g.UltiSnipsJumpForwardTrigger="<C-j>"
-        vim.g.UltiSnipsJumpBackwardTrigger="<C-k>"
+        vim.g.UltiSnipsJumpForwardTrigger="<Tab>"
+        vim.g.UltiSnipsJumpBackwardTrigger="<S-Tab>"
     end,
 }
-
-

@@ -47,3 +47,20 @@ else
     vim.g.python3_host_prog = vim.fn.substitute(vim.fn.system("which python3"), "\n", "", "g")
 end
 
+
+-- Markdown Word Wrap
+local markdown_group = vim.api.nvim_create_augroup("MarkdownWrap", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = markdown_group,
+    pattern = {"markdown"},
+    callback = function()
+        -- Visual wrapping without breaking words
+        vim.wo.wrap = true
+        vim.wo.linebreak = true
+        vim.wo.showbreak = "↪ "
+
+        -- Optional: automatic hard wrapping at 80 characters
+        vim.bo.textwidth = 80
+        vim.bo.formatoptions = vim.bo.formatoptions .. "t"
+    end,
+})

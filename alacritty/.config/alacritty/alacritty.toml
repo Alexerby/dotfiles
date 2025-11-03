@@ -5,3 +5,14 @@ general.import = [
 [window]
 padding.x = 10
 padding.y = 10
+# opacity = 0.97
+
+[[keyboard.bindings]]
+key = "Left"
+mods = "Control"
+chars = "\u001b[1;5D"
+
+[[keyboard.bindings]]
+key = "Right"
+mods = "Control"
+chars = "\u001b[1;5C"
