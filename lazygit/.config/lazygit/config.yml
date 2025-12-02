@@ -1,3 +1,0 @@
-git:
-  merge:
-    args: ["--no-ff"]
