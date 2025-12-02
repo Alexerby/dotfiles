@@ -1,14 +1,14 @@
 
 global !p
 def math():
-	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+    return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
-def comment(): 
-	return vim.eval('vimtex#syntax#in_comment()') == '1'
+def comment():
+    return vim.eval('vimtex#syntax#in_comment()') == '1'
 
 def env(name):
-	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
-	return x != '0' and y != '0'
+    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
+    return x != '0' and y != '0'
 endglobal
 
 
@@ -77,16 +77,10 @@ snippet ddots "Diagonal dots" iA
 \ddots 
 endsnippet
 
-
 context "math()"
 snippet times "times (multiplication)" iA
 \times 
 endsnippet
-
-# context "math()"
-# snippet "(\\?\w+)(,\.|\.,)" "Vector postfix" riA
-# \vec{`!p snip.rv=match.group(1)`}
-# endsnippet 
 
 context "math()"
 snippet pss "Proper subset" Ai
@@ -176,7 +170,7 @@ endsnippet
 
 
 context "math()"
-snippet rm  "Math Roman" iA
+snippet rm  "Math Roman" A
 \mathrm{$1}
 endsnippet
 
@@ -363,12 +357,12 @@ endsnippet
 
 context "math()"
 snippet sin "sin" iA
-\sin{($1)} 
+\sin 
 endsnippet
 
 context "math()"
 snippet cos "cos" iA
-\cos{($1)} 
+\cos 
 endsnippet
 
 context "math()"
@@ -472,7 +466,7 @@ endsnippet
 
 context "math()"
 snippet vec "vector" iA
-\vec{$1} 
+\operatorname{vec} 
 endsnippet
 
 context "math()"
@@ -510,11 +504,11 @@ snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
 endsnippet
 
 context "math()"
-snippet "(bmatrix|pmatrix)" "matrix environments" wrA
+snippet "(bmatrix|pmatrix|vmatrix)" "matrix environments" wrA
 \\begin{`!p snip.rv = match.group(1)`}
 	$1
 \\end{`!p snip.rv = match.group(1)`}
-$2
+$0
 endsnippet
 
 context "math()"
@@ -531,7 +525,6 @@ context "math()"
 snippet perp "perp" iA
 \perp
 endsnippet
-
 
 snippet lr( "left( right)" iA
 \left( ${1:${VISUAL}} \right) $0
@@ -558,12 +551,12 @@ snippet lr[ "left[ right]" iA
 endsnippet
 
 context "math()"
-snippet lr< "leftangle rightangle" iA
+snippet dotp "dot product" iA
 \langle $1 \rangle
 endsnippet
 
-context "math()"
-snippet magn "magnitude / norm" iA
+context "math()" 
+snippet norm "magnitude / norm" iA 
 \| $1 \| 
 endsnippet
 
@@ -600,4 +593,19 @@ endsnippet
 context "math()"
 snippet sign "sign function" iA
 \sign($1)$0
+endsnippet
+
+context "math()"
+snippet exp "exponential function" iA
+\exp \left( $1 \right)$0
+endsnippet
+
+context "math()"
+snippet fdif "" iA
+\dot{$1}$0
+endsnippet
+
+context "math()"
+snippet sdif "" iA
+\ddot{$1}$0
 endsnippet
