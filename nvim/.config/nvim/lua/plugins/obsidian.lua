@@ -9,7 +9,6 @@ return {
     opts = {
         workspaces = {
             { name = "school", path = "~/vaults/school" },
-            { name = "dev",    path = "~/vaults/dev" },
         },
         ui = { enable = false },
         disable_frontmatter = false,
