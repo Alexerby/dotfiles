@@ -20,6 +20,8 @@ map('n', '<leader>w', '<C-w>', opts)
 -- map('n', '<leader>sv', '<Cmd>:source $MYVIMRC<CR>', opts)
 map('n', '<leader>sv', '<Cmd>echo "Sourcing nvim file"<CR><Cmd>source %<CR>', opts)
 
+map('n', '<leader>n', ':!open .<CR><CR>')
+
 
 -----------------------------------------------------------
 -- MarkdownPreview
