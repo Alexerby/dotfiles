@@ -45,6 +45,23 @@ snippet sssec "Section" bA
 $2
 endsnippet
 
+snippet eqref "Equation Reference" iA
+Equation \eqref{$1} $0
+endsnippet
+
+
+snippet sref "Section Reference" iA
+Section \ref{$1} $0
+endsnippet
+
+
+snippet fref "Figure Reference" iA
+Figure \ref{$1} $0
+endsnippet
+
+snippet tref "Table Reference" iA
+Table \ref{$1} $0
+endsnippet
 
 snippet articleTemplate "LaTeX Article with Template" b
 \\documentclass{article}
@@ -61,3 +78,34 @@ $2
 
 \\end{document}
 endsnippet
+
+# Trigger: plot2d
+snippet plot2d "Quick PGFPlot for functions" b
+\begin{tikzpicture}
+	\begin{axis}[
+		axis lines = left,
+		xlabel = {${1:x}$},
+		ylabel = {${2:y}$},
+		xmin=0, ymin=0,
+		domain = 0:${0:10},
+		samples = 100,
+		ytick = \empty, xtick = \empty % Clean APA look
+	]
+		\addplot [black, thick] {${4:2*x^1.8}};
+		\node at (axis description cs: 0.5,-0.1) {$5}; 
+	\end{axis}
+\end{tikzpicture}
+$0
+endsnippet
+
+snippet minipage2 "Two side-by-side minipages" b
+\begin{minipage}[t]{${1:0.45}\textwidth}
+	$2
+\end{minipage}
+\hfill
+\begin{minipage}[t]{${1:0.45}\textwidth}
+	$3
+\end{minipage}
+$0
+endsnippet
+

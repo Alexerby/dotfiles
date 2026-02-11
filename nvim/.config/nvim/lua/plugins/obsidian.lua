@@ -17,6 +17,11 @@ return {
             img_folder = "attachments",
             img_name_func = function() return tostring(os.time()) end,
         },
+        templates = {
+            folder = "templates",
+            date_format = "%Y-%m-%d-%a",
+            time_format = "%H:%M",
+        },
 
         note_id_func = function(title)
             local suffix = ""
@@ -38,6 +43,10 @@ return {
 
             return base_id .. "-" .. suffix
         end,
+
+        -- note_id_func = function(title)
+        --     return title
+        -- end,
 
         note_path_func = function(spec)
             local path = spec.dir / tostring(spec.id)
@@ -61,7 +70,7 @@ return {
         map('n', '<leader>os', ':ObsidianSearch<CR>', kopts)
         map('n', '<leader>ot', ':ObsidianTags<CR>', kopts)
         map('n', '<leader>ow', ':ObsidianWorkspace<CR>', kopts)
-        map('n', '<leader>oe', ':ObsidianExtractNote<CR>', kopts)
+        map('v', '<leader>oe', ':ObsidianExtractNote<CR>', kopts)
 
         map('n', '<leader>odf', delete_to_trash_cmd, kopts)
 

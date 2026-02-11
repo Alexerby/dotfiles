@@ -53,7 +53,7 @@ snippet td "superscript" iA
 endsnippet
 
 context "math()"
-snippet cdot "cdot" iA
+snippet dM "multiplication" iA
 \cdot 
 endsnippet
 
@@ -251,12 +251,7 @@ snippet neg "'Not' logic operator" iA
 endsnippet
 
 context "math()"
-snippet lra "Left Right arrow" iA
-\Leftrightarrow 
-endsnippet
-
-context "math()"
-snippet llra "Long Left Right arrow" iA
+snippet lra "Long Left Right arrow" iA
 \Longleftrightarrow 
 endsnippet
 
@@ -479,10 +474,6 @@ snippet tilde "tilde" iA
 \tilde{$1}
 endsnippet
 
-snippet eqref "Equation Reference" iA
-\eqref{$1} $2
-endsnippet
-
 context "math()"
 snippet above "Stack above" iA
 \stackrel{$1}{$2} 
@@ -601,11 +592,11 @@ snippet exp "exponential function" iA
 endsnippet
 
 context "math()"
-snippet fdif "" iA
-\dot{$1}$0
+snippet "([a-zA-Z])dot" "postfix dot" riA
+\dot `!p snip.rv = match.group(1)`$0
 endsnippet
 
 context "math()"
-snippet sdif "" iA
-\ddot{$1}$0
+snippet "([a-zA-Z])ddot" "postfix ddot" riA
+\ddot `!p snip.rv = match.group(1)`$0
 endsnippet
