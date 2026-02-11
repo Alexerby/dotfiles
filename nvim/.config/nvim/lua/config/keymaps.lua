@@ -24,4 +24,10 @@ map('n', '<leader>sv', '<Cmd>echo "Sourcing nvim file"<CR><Cmd>source %<CR>', op
 -----------------------------------------------------------
 -- MarkdownPreview
 -----------------------------------------------------------
-map('n', '<leader>mp', ':MarkdownPreview<CR>', opts)
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        local buf_opts = { buffer = true, silent = true, noremap = true }
+        vim.keymap.set('n', '<leader>ll', ':MarkdownPreview<CR>', buf_opts)
+    end,
+})
