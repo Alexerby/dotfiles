@@ -4,7 +4,7 @@ return {
     -- tag = "v2.15", -- uncomment to pin to a specific release
     init = function()
         vim.g.vimtex_compiler_latexmk_engines = {
-            _ = "-lualatex"
+            _ = "-pdflatex"
         }
         vim.g.vimtex_compiler_method = "latexmk"
         vim.g.vimtex_view_method = "zathura"
