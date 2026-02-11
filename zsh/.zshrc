@@ -28,8 +28,13 @@ export NVM_DIR="$HOME/.nvm"
 
 # Aliases 
 alias vim="nvim"
+alias python="python3"
 alias ls="eza --icons"
 alias tree="eza -T --icons"
+alias xclipp="xclip -selection clipboard"
+alias ta="tmux a"
+alias cpwd="pwd| xclip -selection clipboard"
+
 export PATH="$HOME/.local/bin:$PATH"
 
 
@@ -43,3 +48,5 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # Jump words
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+
