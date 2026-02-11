@@ -35,6 +35,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # TeXLive path
 export PATH=/usr/local/texlive/2025/bin/x86_64-linux:$PATH
+export PATH=/usr/local/stata/:$PATH
 
 # User binaries and scripts
 export PATH="$HOME/bin:$PATH"
