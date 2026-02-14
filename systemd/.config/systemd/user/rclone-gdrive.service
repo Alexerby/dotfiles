@@ -1,0 +1,25 @@
+[Unit]
+Description=RClone Mount Google Drive
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStartPre=-/bin/fusermount -uz "%h/Google Drive"
+ExecStartPre=/usr/bin/mkdir -p "%h/Google Drive"
+ExecStart=/usr/bin/rclone mount "Google Drive:" "%h/Google Drive" \
+  --config=%h/.config/rclone/rclone.conf \
+  --vfs-cache-mode full \
+  --vfs-cache-max-age 24h \
+  --vfs-cache-max-size 10G \
+  --dir-cache-time 1000h \
+  --poll-interval 15s \
+  --vfs-read-chunk-size 32M \
+  --vfs-read-chunk-size-limit 1G \
+  --buffer-size 64M \
+  --exclude .Trash-1000/**
+ExecStop=/bin/fusermount -u "%h/Google Drive"
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
