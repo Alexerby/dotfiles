@@ -139,24 +139,6 @@ return {
                 -- Navigate completions
                 ['<C-j>']   = cmp.mapping.select_next_item(),
                 ['<C-k>'] = cmp.mapping.select_prev_item(),
-
-                -- Jump **forwards** (UltiSnips only, avoids scrolling the list)
-                -- ['<C-j>'] = function(fallback)
-                --     if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                --         vim.fn["UltiSnips#JumpForwards"]()
-                --     else
-                --         fallback()
-                --     end
-                -- end,
-                --
-                -- -- Jump **backwards** (UltiSnips only, avoids scrolling the list)
-                -- ['<C-k>'] = function(fallback)
-                --     if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-                --         vim.fn["UltiSnips#JumpBackwards"]()
-                --     else
-                --         fallback()
-                --     end
-                -- end,
             },
 
             sources = cmp.config.sources(
