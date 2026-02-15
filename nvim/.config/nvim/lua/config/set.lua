@@ -27,6 +27,24 @@ vim.bo.softtabstop = 4
 vim.opt.expandtab = true
 
 -----------------------------------------------------------
+-- Folding
+-----------------------------------------------------------
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldcolumn = "0"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99 
+vim.opt.foldnestmax = 4
+
+function MyFoldText()
+  local line = vim.fn.getline(vim.v.foldstart)
+  local line_count = vim.v.foldend - vim.v.foldstart + 1
+  return " 󰁂 " .. line .. " (" .. line_count .. " lines) "
+end
+
+vim.opt.foldtext = "v:lua.MyFoldText()"
+
+-----------------------------------------------------------
 -- Autocommands
 -----------------------------------------------------------
 -- Disable Treesitter highlighting for LaTeX (.tex) files
