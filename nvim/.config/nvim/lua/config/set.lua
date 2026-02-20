@@ -4,6 +4,7 @@
 vim.opt.guicursor = ""
 vim.opt.clipboard = "unnamedplus"
 vim.opt.conceallevel = 1
+vim.opt.fixeol = true
 
 -----------------------------------------------------------
 -- Spell Check
