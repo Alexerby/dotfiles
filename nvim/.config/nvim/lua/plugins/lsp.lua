@@ -66,6 +66,7 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "pyright",
+                "ruff",
                 "texlab",
                 "clangd"
             },
@@ -78,6 +79,10 @@ return {
                     end
                     lspconfig[server_name].setup({
                         capabilities = capabilities,
+                        on_atach = function (client, bufnr)
+                            -- Disable hover in favour of pyright to avoid double popups
+                            client.server_capabilities.hoverProvider = false
+                        end,
                     })
                 end,
 
@@ -89,6 +94,9 @@ return {
                 ["pyright"] = function()
                     lspconfig.pyright.setup({
                         capabilities = capabilities,
+                        on_atach =  function (client, bufnr)
+                            client.server_capabilities.documentFormattingProvider = false
+                        end,
                         filetypes = {"python"},
                         settings = {
                             python = {
@@ -99,6 +107,12 @@ return {
                                 },
                             },
                         },
+                    })
+                end,
+
+                ["ruff"] = function ()
+                    lspconfig.ruff.setup({
+                        capabilities = capabilities,
                     })
                 end,
 

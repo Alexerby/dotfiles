@@ -33,3 +33,12 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set('n', '<leader>ll', ':MarkdownPreview<CR>', buf_opts)
     end,
 })
+
+-----------------------------------------------------------
+-- Formatting
+-----------------------------------------------------------
+
+-- Ruff (Python)
+vim.keymap.set('n', '<leader>bf', function()
+    vim.lsp.buf.format({ async = true })
+end, { desc = "Format current buffer" })
