@@ -2,7 +2,7 @@
 
 # --- Configuration ---
 DOTFILES="$HOME/.dotfiles"
-STOW_FOLDERS="nvim,tmux,zsh,zathura,alacritty,lazygit"
+STOW_FOLDERS="nvim,tmux,zsh,zathura,alacritty,lazygit,systemd"
 BACKUP_DIR="$HOME/.dotfiles_backup/$(date +%Y%m%d_%H%M%S)"
 
 # --- Colors for better stdout ---
