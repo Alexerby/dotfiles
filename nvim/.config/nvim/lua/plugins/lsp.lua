@@ -8,13 +8,13 @@ return {
     },
 
     config = function()
-        -- 1. SILENCE THE NOISE: Block those nagging warnings
+        -- SILENCE DEPRECATION WARNINGS
         local original_notify = vim.notify
-        vim.notify = function(msg, ...)
-            if msg:find("deprecated") or msg:find("removed in nvim-lspconfig v3.0.0") then
+        vim.notify = function(msg, level, opts)
+            if type(msg) == "string" and (msg:find("deprecated") or msg:find("removed in nvim-lspconfig v3.0.0")) then
                 return
             end
-            original_notify(msg, ...)
+            original_notify(msg, level, opts)
         end
 
         local cmp = require("cmp")
@@ -33,39 +33,48 @@ return {
             ensure_installed = { "ts_ls", "pyright", "clangd", "lua_ls", "ruff" },
         })
 
-        -- 2. THE NEW 0.11+ WAY (NO WARNINGS):
-        -- Instead of server.setup(), we use vim.lsp.enable(server)
-        -- nvim-lspconfig handles the config registration automatically in 0.11+
-        
-        local function enable_server(name, opts)
+        -- Setup Helper for 0.11+ Native LSP
+        local function setup_server(name, opts)
             opts = opts or {}
             opts.capabilities = capabilities
-            -- This applies your custom opts (like settings or root_dir)
-            -- without calling the "deprecated framework"
+            -- We call config THEN enable to ensure settings are applied
             vim.lsp.config(name, opts)
             vim.lsp.enable(name)
         end
 
-        -- TypeScript
-        enable_server("ts_ls", {
-            root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
-            single_file_support = true
+        -- TypeScript (ts_ls)
+        -- Removing custom root_dir to let default nvim-lspconfig logic (which includes single_file_support) work
+        setup_server("ts_ls", {
+            single_file_support = true,
+            -- Explicitly list filetypes to ensure attachment
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
         })
 
         -- Python
-        enable_server("pyright", {
-            settings = { python = { analysis = { typeCheckingMode = "basic" } } }
+        setup_server("pyright", {
+            settings = { 
+                python = { 
+                    analysis = { 
+                        typeCheckingMode = "basic",
+                        autoSearchPaths = true,
+                        useLibraryCodeForTypes = true
+                    } 
+                } 
+            }
         })
 
         -- C/C++
-        enable_server("clangd")
+        setup_server("clangd")
 
         -- Lua
-        enable_server("lua_ls", {
+        setup_server("lua_ls", {
             settings = { Lua = { diagnostics = { globals = { "vim" } } } }
         })
 
-        -- Completion Setup
+        -- Ruff (Python Linting)
+        setup_server("ruff")
+
+        -- Completion
         cmp.setup({
             snippet = { expand = function(args) vim.fn["UltiSnips#Anon"](args.body) end },
             mapping = cmp.mapping.preset.insert({
@@ -75,10 +84,12 @@ return {
             sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "buffer" } }),
         })
 
-        -- LSP Keymaps
+        -- Global Keymaps
         local map_opts = { noremap = true, silent = true }
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, map_opts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, map_opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, map_opts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, map_opts)
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, map_opts)
     end,
 }
