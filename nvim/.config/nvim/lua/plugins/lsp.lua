@@ -30,7 +30,7 @@ return {
         -----------------------------------------------------------
         vim.diagnostic.config({
             virtual_text = {
-                prefix = '●',  -- Could be '■', '▶', '▎', '●'
+                prefix = '●', -- Could be '■', '▶', '▎', '●'
                 spacing = 2,
             },
             signs = true,
@@ -77,10 +77,10 @@ return {
                     if server_name == "tsserver" then
                         server_name = "ts_ls"
                     end
-                    lspconfig[server_name].setup({
+                    lspconfig.ts_ls.setup({
                         capabilities = capabilities,
-                        on_atach = function (client, bufnr)
-                            -- Disable hover in favour of pyright to avoid double popups
+                        root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+                        on_attach = function(client, bufnr)
                             client.server_capabilities.hoverProvider = false
                         end,
                     })
@@ -94,10 +94,10 @@ return {
                 ["pyright"] = function()
                     lspconfig.pyright.setup({
                         capabilities = capabilities,
-                        on_atach =  function (client, bufnr)
+                        on_attach = function(client, bufnr)
                             client.server_capabilities.documentFormattingProvider = false
                         end,
-                        filetypes = {"python"},
+                        filetypes = { "python" },
                         settings = {
                             python = {
                                 analysis = {
@@ -110,7 +110,7 @@ return {
                     })
                 end,
 
-                ["ruff"] = function ()
+                ["ruff"] = function()
                     lspconfig.ruff.setup({
                         capabilities = capabilities,
                     })
@@ -148,10 +148,10 @@ return {
 
             mapping = {
                 -- Confirm with Enter
-                ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                ['<CR>']  = cmp.mapping.confirm({ select = true }),
 
                 -- Navigate completions
-                ['<C-j>']   = cmp.mapping.select_next_item(),
+                ['<C-j>'] = cmp.mapping.select_next_item(),
                 ['<C-k>'] = cmp.mapping.select_prev_item(),
             },
 
@@ -174,7 +174,6 @@ return {
         local opts = { noremap = true, silent = true }
         map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
         map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-        map('n', 'dg', '<cmd>nohlsearch<CR>', opts)  -- Fixed incomplete command
-
+        map('n', 'dg', '<cmd>nohlsearch<CR>', opts) -- Fixed incomplete command
     end
 }
