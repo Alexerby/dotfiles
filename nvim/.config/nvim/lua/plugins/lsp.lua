@@ -52,14 +52,14 @@ return {
 
         -- Python
         setup_server("pyright", {
-            settings = { 
-                python = { 
-                    analysis = { 
+            settings = {
+                python = {
+                    analysis = {
                         typeCheckingMode = "basic",
                         autoSearchPaths = true,
                         useLibraryCodeForTypes = true
-                    } 
-                } 
+                    }
+                }
             }
         })
 
@@ -76,12 +76,25 @@ return {
 
         -- Completion
         cmp.setup({
-            snippet = { expand = function(args) vim.fn["UltiSnips#Anon"](args.body) end },
+            snippet = {
+                expand = function(args)
+                    vim.fn["UltiSnips#Anon"](args.body)
+                end
+            },
             mapping = cmp.mapping.preset.insert({
+                ["<C-j>"] = cmp.mapping.select_next_item(),
+                ["<C-k>"] = cmp.mapping.select_prev_item(),
                 ["<C-Space>"] = cmp.mapping.complete(),
-                ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                ["<CR>"] = cmp.mapping.confirm({
+                    behavior = cmp.ConfirmBehavior.Replace,
+                    select = true
+                }),
             }),
-            sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "buffer" } }),
+            sources = cmp.config.sources({
+                { name = "nvim_lsp" }
+            }, {
+                { name = "buffer" }
+            }),
         })
 
         -- Global Keymaps
@@ -93,3 +106,4 @@ return {
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, map_opts)
     end,
 }
+
