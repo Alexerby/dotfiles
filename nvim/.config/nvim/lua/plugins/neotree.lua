@@ -8,7 +8,13 @@ return {
     },
 
   config = function()
-
+      require("neo-tree").setup({
+          filesystem = {
+              follow_current_file = {
+                  enabled = true,
+              },
+          },
+      })
 
       -----------------------------------------------------------
       -- Keybindings

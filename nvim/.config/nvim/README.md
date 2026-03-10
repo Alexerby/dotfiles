@@ -20,3 +20,6 @@ Personal reminders for configuring and troubleshooting this Neovim setup.
 **Check**:
 - Run `:checkhealth` in Neovim to confirm.
 - Look for a warning about `tslib` missing if the issue persists.
+
+### TODO 
+- Auto install `npm i -g typescript-language-server typescript`.
