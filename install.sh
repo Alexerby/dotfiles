@@ -53,12 +53,24 @@ install_dependencies() {
     fi
 }
 
+install_neovim() {
+    header "Installing Neovim v0.11.6 (Stable)"
+    NVIM_VERSION="v0.11.6"
+    log_info "Downloading Neovim $NVIM_VERSION..."
+    curl -L -o /tmp/nvim-linux-x86_64.appimage "https://github.com/neovim/neovim/releases/download/$NVIM_VERSION/nvim-linux-x86_64.appimage"
+    chmod +x /tmp/nvim-linux-x86_64.appimage
+    sudo mv /tmp/nvim-linux-x86_64.appimage /usr/local/bin/nvim
+    log_success "Neovim $NVIM_VERSION installed to /usr/local/bin/nvim"
+}
+
+
 # --- Main Execution ---
 
 # Ensure we are in the right place
 cd "$DOTFILES" || { log_error "Could not find $DOTFILES"; exit 1; }
 
 install_dependencies
+install_neovim
 
 header "Stowing Configurations"
 

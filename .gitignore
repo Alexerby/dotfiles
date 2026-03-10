@@ -1,0 +1,30 @@
+# Neovim
+.local/
+.cache/
+.state/
+undo/
+swap/
+backup/
+# Keep lazy-lock.json if you want to lock plugin versions, otherwise ignore
+# lazy-lock.json
+
+# Node/JS
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+.python-version
+
+# General
+.DS_Store
+.env
+.env.*
+*.log
+*.tmp
