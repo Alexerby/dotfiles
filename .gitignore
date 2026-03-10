@@ -5,8 +5,6 @@
 undo/
 swap/
 backup/
-# Keep lazy-lock.json if you want to lock plugin versions, otherwise ignore
-# lazy-lock.json
 
 # Node/JS
 node_modules/
