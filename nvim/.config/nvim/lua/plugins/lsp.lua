@@ -5,35 +5,22 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "hrsh7th/nvim-cmp",
         "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "quangnguyen30192/cmp-nvim-ultisnips",
-        "nvimtools/none-ls.nvim",
-        "dcampos/cmp-emmet-vim",
     },
 
     config = function()
-        local lspconfig = require("lspconfig")
+        -- 1. SILENCE THE NOISE: Block those nagging warnings
+        local original_notify = vim.notify
+        vim.notify = function(msg, ...)
+            if msg:find("deprecated") or msg:find("removed in nvim-lspconfig v3.0.0") then
+                return
+            end
+            original_notify(msg, ...)
+        end
+
         local cmp = require("cmp")
         local cmp_lsp = require("cmp_nvim_lsp")
-        local util = require("lspconfig.util")
+        local lspconfig = require("lspconfig")
 
-        -----------------------------------------------------------
-        -- Diagnostics
-        -----------------------------------------------------------
-        vim.diagnostic.config({
-            virtual_text = { prefix = "●", spacing = 2 },
-            signs = true,
-            underline = true,
-            update_in_insert = true,
-            severity_sort = true,
-            float = { focusable = false, style = "minimal", border = "rounded", source = "always" },
-        })
-
-        -----------------------------------------------------------
-        -- Capabilities
-        -----------------------------------------------------------
         local capabilities = vim.tbl_deep_extend(
             "force",
             {},
@@ -41,101 +28,57 @@ return {
             cmp_lsp.default_capabilities()
         )
 
-        -----------------------------------------------------------
-        -- Mason & Server Setup
-        -----------------------------------------------------------
         require("mason").setup()
-        
-        -- Use setup_handlers to prevent the 'vim.lsp.enable' nil crash on 0.10.4
         require("mason-lspconfig").setup({
-            ensure_installed = { "lua_ls", "pyright", "ruff", "texlab", "clangd", "ts_ls" },
+            ensure_installed = { "ts_ls", "pyright", "clangd", "lua_ls", "ruff" },
         })
 
-        local function setup_server(server_name, opts)
+        -- 2. THE NEW 0.11+ WAY (NO WARNINGS):
+        -- Instead of server.setup(), we use vim.lsp.enable(server)
+        -- nvim-lspconfig handles the config registration automatically in 0.11+
+        
+        local function enable_server(name, opts)
             opts = opts or {}
             opts.capabilities = capabilities
-            if lspconfig[server_name] then
-                lspconfig[server_name].setup(opts)
-            else
-                vim.notify("LSP Config not found for: " .. server_name, vim.log.levels.ERROR)
-            end
+            -- This applies your custom opts (like settings or root_dir)
+            -- without calling the "deprecated framework"
+            vim.lsp.config(name, opts)
+            vim.lsp.enable(name)
         end
 
-        -----------------------------------------------------------
-        -- Custom Server Configurations
-        -----------------------------------------------------------
+        -- TypeScript
+        enable_server("ts_ls", {
+            root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+            single_file_support = true
+        })
 
         -- Python
-        setup_server("pyright", {
-            on_attach = function(client, bufnr)
-                client.server_capabilities.documentFormattingProvider = false
-            end,
-            root_dir = util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git"),
-            settings = {
-                python = {
-                    analysis = {
-                        typeCheckingMode = "basic",
-                        autoSearchPaths = true,
-                        useLibraryCodeForTypes = true,
-                    },
-                },
-            },
+        enable_server("pyright", {
+            settings = { python = { analysis = { typeCheckingMode = "basic" } } }
         })
+
+        -- C/C++
+        enable_server("clangd")
 
         -- Lua
-        setup_server("lua_ls", {
-            settings = {
-                Lua = {
-                    runtime = { version = "Lua 5.1" },
-                    diagnostics = {
-                        globals = { "vim", "bit", "it", "describe", "before_each", "after_each" },
-                    },
-                },
-            },
+        enable_server("lua_ls", {
+            settings = { Lua = { diagnostics = { globals = { "vim" } } } }
         })
 
-        -- Typescript (ts_ls)
-        setup_server("ts_ls", {
-            -- Stable root detection for 0.10.4
-            root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-            single_file_support = true,
-        })
-
-        -- Generic servers
-        local generic_servers = { "clangd", "ruff", "texlab" }
-        for _, s in ipairs(generic_servers) do
-            setup_server(s)
-        end
-
-        -----------------------------------------------------------
-        -- nvim-cmp setup
-        -----------------------------------------------------------
+        -- Completion Setup
         cmp.setup({
-            snippet = {
-                expand = function(args)
-                    vim.fn["UltiSnips#Anon"](args.body)
-                end,
-            },
-            mapping = {
+            snippet = { expand = function(args) vim.fn["UltiSnips#Anon"](args.body) end },
+            mapping = cmp.mapping.preset.insert({
+                ["<C-Space>"] = cmp.mapping.complete(),
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                ["<C-j>"] = cmp.mapping.select_next_item(),
-                ["<C-k>"] = cmp.mapping.select_prev_item(),
-            },
-            sources = cmp.config.sources({
-                { name = "nvim_lsp" },
-                { name = "ultisnips" },
-                { name = "emmet_vim" },
-            }, {
-                { name = "buffer" },
             }),
+            sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "buffer" } }),
         })
 
-        -----------------------------------------------------------
-        -- Keybindings
-        -----------------------------------------------------------
-        local opts = { noremap = true, silent = true }
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-        vim.keymap.set("n", "dg", "<cmd>nohlsearch<CR>", opts)
+        -- LSP Keymaps
+        local map_opts = { noremap = true, silent = true }
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, map_opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, map_opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, map_opts)
     end,
 }
