@@ -5,6 +5,7 @@ vim.opt.guicursor = ""
 vim.opt.clipboard = "unnamedplus"
 vim.opt.conceallevel = 1
 vim.opt.fixeol = true
+vim.opt.maxmempattern = 2000
 
 -----------------------------------------------------------
 -- Spell Check
@@ -34,13 +35,13 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99 
+vim.opt.foldlevelstart = 99
 vim.opt.foldnestmax = 4
 
 function MyFoldText()
-  local line = vim.fn.getline(vim.v.foldstart)
-  local line_count = vim.v.foldend - vim.v.foldstart + 1
-  return " 󰁂 " .. line .. " (" .. line_count .. " lines) "
+    local line = vim.fn.getline(vim.v.foldstart)
+    local line_count = vim.v.foldend - vim.v.foldstart + 1
+    return " 󰁂 " .. line .. " (" .. line_count .. " lines) "
 end
 
 vim.opt.foldtext = "v:lua.MyFoldText()"
@@ -53,9 +54,9 @@ vim.opt.foldtext = "v:lua.MyFoldText()"
 
 local tex_group = vim.api.nvim_create_augroup("MyTexAutocmds", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-  group = tex_group,
-  pattern = "tex",
-  command = "TSDisable highlight",
+    group = tex_group,
+    pattern = "tex",
+    command = "TSDisable highlight",
 })
 
 
@@ -65,4 +66,3 @@ if vim.fn.exists("$VIRTUAL_ENV") == 1 then
 else
     vim.g.python3_host_prog = vim.fn.substitute(vim.fn.system("which python3"), "\n", "", "g")
 end
-
