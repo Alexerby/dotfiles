@@ -35,6 +35,7 @@ set notification-warning-fg "#657b83"
 # Define normal mappings
 # map j scroll half-down
 # map k scroll half-up
+set scroll-step 100
 
 # Define mappings for fullscreen
 map [fullscreen] a adjust_window best-fit
