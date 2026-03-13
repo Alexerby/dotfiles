@@ -30,10 +30,15 @@ path=(
 )
 export PATH
 
-# NVM Initialization
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# Golang
+export GOPATH="$HOME/go"
+export PATH=$PATH:$GOPATH/bin
+
+
+# Node version manager (NVM)
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # ------------------------------------------------------------------------------
 # PYTHON WORKFLOW FUNCTIONS
@@ -97,3 +102,4 @@ alias cb="xclip -selection clipboard"
 # ------------------------------------------------------------------------------
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
