@@ -6,20 +6,23 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # ------------------------------------------------------------------------------
-# 2. CORE OH-MY-ZSH & THEME CONFIG
+# CORE OH-MY-ZSH & THEME CONFIG
 # ------------------------------------------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Load Oh My Zsh (if you use it) or just the theme
+if [[ ! -d "$ZSH/custom/themes/powerlevel10k" ]]; then
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH/custom/themes/powerlevel10k"
+fi
+
 [[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+source "$ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
 
 # ------------------------------------------------------------------------------
 # ENVIRONMENT VARIABLES & PATHS
 # ------------------------------------------------------------------------------
-# Use a unique array to prevent duplicate paths when sourcing multiple times
 typeset -U path
 path=(
   "$HOME/.local/bin"
@@ -30,15 +33,12 @@ path=(
 )
 export PATH
 
-# Golang
 export GOPATH="$HOME/go"
 export PATH=$PATH:$GOPATH/bin
 
-
-# Node version manager (NVM)
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # ------------------------------------------------------------------------------
 # PYTHON WORKFLOW FUNCTIONS
@@ -76,7 +76,6 @@ pdv() {
 # ------------------------------------------------------------------------------
 # SHELL UTILS & ALIASES
 # ------------------------------------------------------------------------------
-# System Reload
 sz() {
   if zsh -n "$HOME/.zshrc"; then
     source "$HOME/.zshrc"
@@ -87,7 +86,6 @@ sz() {
   fi
 }
 
-# General Aliases
 alias vim="nvim"
 alias python="python3"
 alias ls="eza --icons"
@@ -103,3 +101,15 @@ alias cb="xclip -selection clipboard"
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
+# ------------------------------------------------------------------------------
+# Sourcing
+# ------------------------------------------------------------------------------
+if [[ ! -d "$ZSH/plugins/zsh-autosuggestions" ]]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH/plugins/zsh-autosuggestions"
+fi
+source "$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+if [[ ! -d "$ZSH/plugins/zsh-syntax-highlighting" ]]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH/plugins/zsh-syntax-highlighting"
+fi
+source "$ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
