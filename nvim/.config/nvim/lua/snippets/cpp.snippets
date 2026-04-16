@@ -1,0 +1,41 @@
+extends c
+
+# --- Structs (High Priority) ---
+priority 100
+snippet struct "Struct" bA
+struct ${1:Name} {
+	$2
+};
+$0
+endsnippet
+
+# --- Classes ---
+priority 10
+snippet class "Class" bA
+class ${1:Name} {
+public:
+	$2
+private:
+	$0
+};
+endsnippet
+
+# --- Documentation ---
+priority 10
+
+# Changed 'b' to 'bw' to allow expansion at start of line with indentation
+snippet doc "C function docstring (Doxygen-style)" bw
+/**
+ * @brief ${1:Brief description}
+ *
+ * @param ${2:param} ${3:Description of parameter}
+ * @return ${4:Description of return value}
+ */
+$0
+endsnippet
+
+# Removed trailing space after 'bw'
+snippet idoc "C function docstring inline" bw
+/* ${1:Description} */
+$0
+endsnippet

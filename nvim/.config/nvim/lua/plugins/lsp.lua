@@ -1,0 +1,112 @@
+return {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "hrsh7th/nvim-cmp",
+        "hrsh7th/cmp-nvim-lsp",
+    },
+
+    config = function()
+        -- SILENCE DEPRECATION WARNINGS
+        local original_notify = vim.notify
+        vim.notify = function(msg, level, opts)
+            if type(msg) == "string" and (msg:find("deprecated") or msg:find("removed in nvim-lspconfig v3.0.0")) then
+                return
+            end
+            original_notify(msg, level, opts)
+        end
+
+        local cmp = require("cmp")
+        local cmp_lsp = require("cmp_nvim_lsp")
+
+        local capabilities = vim.tbl_deep_extend(
+            "force",
+            {},
+            vim.lsp.protocol.make_client_capabilities(),
+            cmp_lsp.default_capabilities()
+        )
+
+        require("mason").setup()
+        require("mason-lspconfig").setup({
+            ensure_installed = { "ts_ls", "pyright", "clangd", "lua_ls", "bashls", "tailwindcss" },
+        })
+
+        -- Setup Helper for 0.11+ Native LSP
+        local function setup_server(name, opts)
+            opts = opts or {}
+            opts.capabilities = capabilities
+            vim.lsp.config(name, opts)
+            vim.lsp.enable(name)
+        end
+
+        setup_server("tailwindcss")
+
+        setup_server("ts_ls", {
+            single_file_support = true,
+            -- Explicitly list filetypes to ensure attachment
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+        })
+
+        -- Python
+        setup_server("pyright", {
+            settings = {
+                python = {
+                    analysis = {
+                        typeCheckingMode = "basic",
+                        autoSearchPaths = true,
+                        useLibraryCodeForTypes = true
+                    }
+                }
+            }
+        })
+
+        -- C/C++
+        setup_server("clangd")
+
+        -- Lua
+        setup_server("lua_ls", {
+            settings = { Lua = { diagnostics = { globals = { "vim" } } } }
+        })
+
+        -- Ruff (Python Linting)
+        setup_server("ruff")
+
+        -- Bash
+        setup_server("bashls")
+
+        -- Completion
+        cmp.setup({
+            snippet = {
+                expand = function(args)
+                    vim.fn["UltiSnips#Anon"](args.body)
+                end
+            },
+            mapping = cmp.mapping.preset.insert({
+                ["<C-j>"] = cmp.mapping.select_next_item(),
+                ["<C-k>"] = cmp.mapping.select_prev_item(),
+                ["<C-Space>"] = cmp.mapping.complete(),
+                ["<CR>"] = cmp.mapping.confirm({
+                    behavior = cmp.ConfirmBehavior.Replace,
+                    select = true
+                }),
+            }),
+            sources = cmp.config.sources({
+                { name = "nvim_lsp" }
+            }, {
+                { name = "buffer" }
+            }),
+        })
+
+        -- Global Keymaps
+        local map_opts = { noremap = true, silent = true }
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, map_opts)
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, map_opts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, map_opts)
+        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, map_opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, map_opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, map_opts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, map_opts)
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, map_opts)
+    end,
+}
