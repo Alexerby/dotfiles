@@ -22,6 +22,7 @@ user-invocable: false
 
 ## Math and Equations
 
+- Use `\( ... \)` for inline math, never `$...$`. Always include a space after `\(` and before `\)`.
 - Display equations that are the main point of a paragraph. Keep incidental expressions inline.
 - Wrap displayed equations with a blank `%` comment line above and below for spacing:
   ```

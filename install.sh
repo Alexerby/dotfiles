@@ -18,6 +18,16 @@ log_success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 log_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 
+check_apt_lock() {
+    if sudo fuser /var/lib/dpkg/lock-frontend &>/dev/null 2>&1; then
+        LOCK_PID=$(sudo fuser /var/lib/dpkg/lock-frontend 2>/dev/null)
+        LOCK_CMD=$(ps -p "$LOCK_PID" -o comm= 2>/dev/null || echo "unknown")
+        log_error "apt is currently locked by process $LOCK_PID ($LOCK_CMD)."
+        log_error "Wait for it to finish, or kill it with: sudo kill $LOCK_PID"
+        exit 1
+    fi
+}
+
 header() {
     echo -e "\n${BLUE}========================================"
     echo -e "  $1"
@@ -215,6 +225,14 @@ install_nvm_node() {
         log_success "neovim npm package already installed."
     fi
 
+    if ! command -v yarn &>/dev/null; then
+        log_info "Installing yarn (required for markdown-preview.nvim)..."
+        npm install -g yarn &>/dev/null
+        log_success "yarn installed."
+    else
+        log_success "yarn already installed."
+    fi
+
     if ! command -v tree-sitter &>/dev/null; then
         log_info "Installing tree-sitter-cli (via cargo)..."
         sudo apt install -y libclang-dev &>/dev/null
@@ -241,6 +259,59 @@ install_ruff() {
     log_success "ruff installed: $(ruff --version)"
 }
 
+install_zsh() {
+    if ! command -v zsh &> /dev/null; then
+        header "Installing zsh"
+        log_info "Running apt install zsh..."
+        sudo apt install -y zsh
+        log_success "zsh installed."
+    else
+        log_success "zsh is already installed."
+    fi
+
+    if [ "$SHELL" != "$(which zsh)" ]; then
+        log_info "Setting zsh as default shell..."
+        chsh -s "$(which zsh)"
+        log_success "Default shell set to zsh. Log out and back in for it to take effect."
+    else
+        log_success "zsh is already the default shell."
+    fi
+}
+
+install_zathura() {
+    if command -v zathura &> /dev/null; then
+        log_success "zathura is already installed."
+        return
+    fi
+
+    header "Installing zathura"
+    log_info "Running apt install zathura..."
+    sudo apt install -y zathura zathura-pdf-poppler xdotool
+    log_success "zathura installed."
+}
+
+install_tpm() {
+    if [ -d "$HOME/.tmux/plugins/tpm" ]; then
+        log_success "TPM is already installed."
+        return
+    fi
+
+    header "Installing TPM (Tmux Plugin Manager)"
+    git clone --depth=1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+    log_success "TPM installed."
+}
+
+install_latex() {
+    if command -v pdflatex &> /dev/null && command -v latexmk &> /dev/null; then
+        log_success "LaTeX is already installed: $(pdflatex --version | head -1)"
+        return
+    fi
+
+    header "Installing LaTeX (texlive-full — this will take a while)"
+    sudo apt install -y texlive-full
+    log_success "LaTeX installed: $(pdflatex --version | head -1)"
+}
+
 install_lazygit() {
     if command -v lazygit &> /dev/null; then
         log_success "lazygit is already installed: $(lazygit --version | head -1)"
@@ -254,6 +325,27 @@ install_lazygit() {
     sudo install /tmp/lazygit /usr/local/bin/lazygit
     rm /tmp/lazygit.tar.gz /tmp/lazygit
     log_success "lazygit installed: $(lazygit --version | head -1)"
+}
+
+install_rclone() {
+    if command -v rclone &> /dev/null && [[ "$(which rclone)" != /snap/* ]]; then
+        log_success "rclone is already installed: $(rclone --version | head -1)"
+        return
+    fi
+
+    header "Installing rclone (official installer)"
+    curl -fsSL https://rclone.org/install.sh | sudo bash &>/dev/null
+    log_success "rclone installed: $(rclone --version | head -1)"
+}
+
+install_claude_skills() {
+    SKILLS_SRC="$DOTFILES/.claude/skills"
+    SKILLS_DST="$HOME/.claude/skills"
+    mkdir -p "$SKILLS_DST"
+    for skill in "$SKILLS_SRC"/*.md; do
+        ln -sf "$skill" "$SKILLS_DST/$(basename "$skill")"
+        log_success "Linked Claude skill: $(basename "$skill")"
+    done
 }
 
 install_golang() {
@@ -286,15 +378,22 @@ install_golang() {
 # Ensure we are in the right place
 cd "$DOTFILES" || { log_error "Could not find $DOTFILES"; exit 1; }
 
+check_apt_lock
 install_dependencies
+install_zsh
 install_rust
 install_jetbrains_mono_nerd_font
 install_neovim
 install_nvm_node
 install_alacritty
 install_ruff
+install_zathura
+install_tpm
+install_latex
 install_lazygit
+install_rclone
 install_golang
+install_claude_skills
 
 header "Stowing Configurations"
 
