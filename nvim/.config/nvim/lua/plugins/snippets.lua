@@ -1,33 +1,34 @@
 return {
-    {
-        "SirVer/ultisnips",
-        config = function()
-            vim.g.UltiSnipsEditSplit = "vertical"
-            vim.g.UltiSnipsSnippetDirectories = { "~/.config/nvim/lua/snippets" }
-            vim.g.UltiSnipsJumpForwardTrigger = "<Tab>"
-            vim.g.UltiSnipsJumpBackwardTrigger = "<S-Tab>"
-        end,
+  {
+    "SirVer/ultisnips",
+    config = function()
+      vim.g.UltiSnipsEditSplit = "vertical"
+      vim.g.UltiSnipsSnippetDirectories = { "~/.config/nvim/lua/snippets" }
+      vim.g.UltiSnipsExpandTrigger = "<C-e>"
+      vim.g.UltiSnipsJumpForwardTrigger = "<Tab>"
+      vim.g.UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+    end,
+  },
+  {
+    "mattn/emmet-vim",
+    ft = {
+      "html",
+      "css",
+      "scss",
+      "sass",
+      "javascript",
+      "typescript",
+      "javascriptreact",
+      "typescriptreact",
+      "vue",
+      "svelte",
+      "htmldjango",
     },
-    {
-        "mattn/emmet-vim",
-        ft = {
-            "html",
-            "css",
-            "scss",
-            "sass",
-            "javascript",
-            "typescript",
-            "javascriptreact",
-            "typescriptreact",
-            "vue",
-            "svelte",
-            "htmldjango",
-        },
-        init = function()
-            -- Use Lua API to set keymaps in insert and select modes
-            local opts = { noremap = false, silent = true, expr = false }
-            vim.keymap.set("i", "<C-e>", "<Plug>(emmet-expand-abbr)", opts)
-            vim.keymap.set("s", "<C-e>", "<Plug>(emmet-expand-abbr)", opts)
-        end,
-    },
+    init = function()
+      -- Use Lua API to set keymaps in insert and select modes
+      local opts = { noremap = false, silent = true, expr = false }
+      vim.keymap.set("i", "<C-e>", "<Plug>(emmet-expand-abbr)", opts)
+      vim.keymap.set("s", "<C-e>", "<Plug>(emmet-expand-abbr)", opts)
+    end,
+  },
 }
